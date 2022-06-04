@@ -1,0 +1,92 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef vector<int> vi;
+typedef pair<int, int> pi;
+typedef vector<long long> vl;
+typedef pair<long long, long long> pl;
+typedef vector<vector<long long>> matrix;
+
+#define F 						first
+#define S 						second
+#define PB 						push_back
+#define MP 						make_pair
+#define all(c) 					c.begin(), c.end()
+#define f(i,a,b) 				for(ll i=a; i<b; i++)
+#define rep(i,n) 				f(i,0,n)
+#define fd(i, b, a)				for(ll i=b; i>=a; i--)
+#define repr(i,n)				fd(i, n-1, 0)
+#define tr(c,i) 				for(typeof(c).begin() i = c.begin(); i != c.end(); i++)
+#define present(c,x) 			(c.find(x) != c.end())	//for set and map
+#define cpresent(c,x) 			(find(all(c),x) != c.end())	//for vectors
+#define w(t)					ll t; cin>>t; while(t--)
+#define ps(num, places)			fixed<<setprecision(places)<<num //use as cout<<ps(x, y)<<"\n";
+#define sz(x) 					(ll)(x).size()
+#define lb						lower_bound
+#define ub						upper_bound
+#define nl						"\n"
+
+const ld epsilon = 1e-9;
+const ll MOD = 1e9+7;
+
+bool comp(ll a, ll b) {
+	return (a > b);
+}
+
+ll binpow(ll a, ll b) {
+	ll res = 1;
+	while(b>0) {
+		if(b&1) res *= a;
+		a = a*a;
+		b >>= 1;
+	}
+	return res;
+}
+
+bool checkBingo(const matrix &a) {
+	if(a[0][0] && a[0][1] && a[0][2]) return true;
+	if(a[1][0] && a[1][1] && a[1][2]) return true;
+	if(a[2][0] && a[2][1] && a[2][2]) return true;
+	if(a[0][0] && a[1][0] && a[2][0]) return true;
+	if(a[0][1] && a[1][1] && a[2][1]) return true;
+	if(a[0][2] && a[1][2] && a[2][2]) return true;
+	if(a[0][0] && a[1][1] && a[2][2]) return true;
+	if(a[0][2] && a[1][1] && a[2][0]) return true;
+	return false;
+}
+
+void runcase() {
+	matrix a(3, vl(3));
+	matrix b(3, vl(3, 0));
+	rep(i, 3) rep(j, 3) cin >> a[i][j];
+	ll n;
+	cin >> n;
+	vl c(n);
+	rep(i, n) {
+		cin >> c[i];
+		rep(j, 3) {
+			rep(k, 3) {
+				if(a[j][k]==c[i]) b[j][k] = 1;
+			}
+		}
+	}
+	if(checkBingo(b)) cout<<"Yes\n";
+	else cout<<"No\n";
+}
+
+int main() {
+	ios::sync_with_stdio(false); cin.tie(0); cout.precision(10);
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt", "r", stdin);
+		freopen("output.txt", "w", stdout);
+	#endif
+
+	ll tests = 1;
+	// cin >> tests;
+	while(tests--) {
+		runcase();
+	}
+	return 0;
+}
